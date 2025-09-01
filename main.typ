@@ -7,8 +7,11 @@
 
 #import "theme.typ": theme, title
 #show: theme.with(
-  date: datetime(year: 2024, month: 6, day: 1),
-  copyright: [Copyright #sym.copyright 2025 Kian Kasad]
+  copyright: [Copyright #sym.copyright 2025 Kian Kasad. MIT License.]
+)
+#set document(
+  // title will be set by #title[]
+  author: "Kian Kasad",
 )
 
 #title[Tree-sitter is awesome and you should use it]
