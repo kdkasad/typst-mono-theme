@@ -7,7 +7,7 @@
 
 #import "theme.typ": theme, title
 #show: theme.with(
-  copyright: [Copyright #sym.copyright 2025 Kian Kasad. MIT License.]
+  copyright: [Copyright #sym.copyright 2025 Kian Kasad]
 )
 #set document(
   // title will be set by #title[]
