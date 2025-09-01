@@ -1,7 +1,10 @@
 TYPST := typst
 
 .PHONY: all
-all: main.pdf
+all: example
 
-main.pdf: $(wildcard *.typ)
-	$(TYPST) compile --font-path ./fonts main.typ
+.PHONY: example
+example: example.pdf
+
+%.pdf: %.typ theme.typ
+	$(TYPST) compile --font-path ./fonts $<
