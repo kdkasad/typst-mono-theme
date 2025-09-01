@@ -24,6 +24,8 @@
   ),
 )
 
+#let heading-font-state = state("heading-font", "Iosevka")
+
 // Theme function. Use in a global show rule, e.g.:
 //
 //     #show: theme
@@ -41,7 +43,18 @@
 // The copyright is a custom optional content value. E.g.:
 //
 //     #show: theme.with(copyright: [#sym.copyright 2025 Kian Kasad])
-#let theme(it, date: auto, copyright: none) = {
+//
+// You can customize the fonts used for the headings/title and body
+// respectively:
+//
+//     #show: theme.with(heading-font: "Iosevka", body-font: "Inter")
+#let theme(
+  it,
+  date: auto,
+  copyright: none,
+  heading-font: "Iosevka",
+  body-font: "Iosevka",
+) = {
   assert(
     date == auto or type(date) == datetime or type(date) == content,
     message: "date must be auto, datetime, or content"
@@ -51,8 +64,10 @@
     message: "copyright must be none or content"
   )
 
+  heading-font-state.update(heading-font)
+
   set heading(numbering: "1.")
-  set text(10pt, font: "Iosevka")
+  set text(10pt, font: body-font)
   set par(leading: 6pt, justify: true)
 
   set page(
@@ -92,6 +107,7 @@
     }
     let params = heading-params.at(level)
     set text(
+      font: heading-font,
       size: params.size,
       weight: "black",
       tracking: params.tracking,
@@ -105,9 +121,9 @@
 
 // Render a title.
 // This WILL set the title in the document's metadata as well.
-#let title(it) = {
+#let title(it) = context {
   assert(type(it) == content, message: "title must be content")
-  set text(size: 36pt, weight: "black", tracking: -3pt)
+  set text(size: 36pt, font: heading-font-state.get(), weight: "black", tracking: -3pt)
   set par(leading: 10pt)
   set document(title: it)
   it
