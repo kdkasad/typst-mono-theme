@@ -59,11 +59,11 @@
     footer: context {
       let rendered-date = {
         // Use current date if no date is provided
+        let date-format = "[month repr:long] [day padding:none], [year]"
         if date == auto {
-          date = datetime.today()
-        }
-        if type(date) == datetime {
-          date.display("[month repr:long] [day padding:none], [year]")
+          datetime.today().display(date-format)
+        } else if type(date) == datetime {
+          date.display(date-format)
         } else {
           date
         }
